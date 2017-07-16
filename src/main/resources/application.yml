@@ -1,0 +1,26 @@
+server:
+  port: 8888
+  context-path: /
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://176.114.21.144:3306/hb
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
+
+  http:
+    encoding:
+      force: true
+mybatis:
+  type-aliases-package: cn.tarena.ht.pojo
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+
+
+
+
+

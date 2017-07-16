@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tarena.ht.mapper.FlightMapper">
+	<!-- 封装成主对象 -->
+	<resultMap type="Flight" id="flightRM" autoMapping="true">
+		<id column="id" property="id" />
+	</resultMap>
+
+	<!-- 查找所有航班信息 -->
+	<select id="findAll" resultMap="flightRM">
+		select * from flight_p
+	</select>
+
+	<!-- 根据id查询航班详情信息 -->
+	<select id="findOne" resultMap="flightRM">
+		select * from flight_p where
+		id=#{id}
+	</select>
+
+	<!-- 根据id修改航班信息 -->
+	<update id="updateFlight">
+		update flight_p set
+		f_id=#{fId},
+		f_type=#{fType},
+		f_company=#{fCompany},
+		f_company_name=#{fCompanyName},
+		f_number=#{fNumber},
+		f_rank=#{fRank},
+		f_location=#{fLocation},
+		f_location_name=#{fLocationName},
+		f_lo_airport=#{fLoAirport},
+		f_departure=#{fDeparture},
+		f_departure_name=#{fDepartureName},
+		f_de_airport=#{fDeAirport},
+		f_starttime=#{fStarttime},
+		f_overtime=#{fOvertime},
+		f_price=#{fPrice},
+		f_tax=#{fTax},
+		f_total=#{fTotal},
+		f_reserve=#{fReserve},
+		f_commission=#{fCommission}
+
+		where id=#{id}
+	</update>
+
+	<!-- 删除航班信息 -->
+	 <delete id="deleteFlight">
+		delete from flight_p where id in(
+		<foreach collection="array" item="id" separator=",">
+			#{id}
+		</foreach>
+		)
+	</delete> 
+
+	<!-- 新增航班信息 -->
+	<insert id="saveFlight">
+		insert into flight_p values(
+			#{id},#{fId},#{fType},
+			#{fCompanyName},#{fCompany},
+			#{fNumber},
+			#{fLocation},#{fLocationName},
+			#{fLoAirport},#{fDeparture},
+			#{fDepartureName},#{fDeAirport},
+			#{fStarttime},#{fOvertime},#{fRank},#{fPrice},
+			#{fTax},#{fTotal},
+			#{fReserve},#{fCommission}
+		)
+	</insert>
+</mapper>
